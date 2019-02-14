@@ -53,17 +53,17 @@ div.next-content {
     border: 1px solid #d9d9d9;
 }
 
-.next-content__hr {
+.next-content--hr {
     display: flex;
     border: 1px solid #e6e6e6;
 }
 
-div.co-paymentBlock {
+div.co-payment-block {
     padding: 10px;
     flex: 3;
 }
 
-div.co-cartBlock {
+div.co-cart-block {
     padding: 10px;
     flex: 2;
     display: flex;
@@ -71,7 +71,7 @@ div.co-cartBlock {
     justify-content: space-between
 }
 
-.next-content__heading {
+.next-content--heading {
     color: grey;
     font-weight: bold;
 }
@@ -92,7 +92,7 @@ div.co-cartBlock {
     margin-left: 5%;
 }
 
-.card-images__text {
+.card-images--text {
     font-size: 12px;
     margin-bottom: 5%;
     margin-left: 5%;
@@ -114,7 +114,7 @@ div.co-cartBlock {
     justify-content: space-between
 }
 
-.new-card__input {
+.new-card--input {
     width: 100%;
     border: 2px solid #d9d9d9;
     border-radius: 5%;
@@ -144,7 +144,7 @@ button {
     margin-left: 6px;
 }
 
-.co-cb__list {
+.co-cb--list {
     justify-content: space-between;
 }
 
@@ -152,32 +152,32 @@ button {
     font-weight: bold;
 }
 
-.co-cb__ImageContainer {
+.co-cb--image-container {
     height: auto;
     width: 9%;
     padding: 2%;
     background-color: #d9d9d9;
 }
 
-.co-cb__ImC--mobileCase {
+.co-cb--imc--mobile-case {
     height: auto;
     width: 12%;
     padding: 2%;
     background-color: #d9d9d9;
 }
 
-.co-cb__Images {
+.co-cb--images {
     width: 96%;
     object-fit: cover;
 }
 
-.co-cb__Im--mobileCase {
+.co-cb--im--mobile-case {
     width: 105%;
     height: 100%;
     margin-right: 20%;
 }
 
-.co-cb__Price {
+.co-cb--price {
     white-space: nowrap;
 }
 
@@ -185,21 +185,21 @@ button {
     display: flex;
 }
 
-.co-cb__description {
+.co-cb--description {
     color: grey;
     font-size: 12px;
     margin-left: 2%;
 }
 
-.co-cb__desc--bold {
+.co-cb--desc--bold {
     font-weight: bold;
 }
 
-.co-cb__desc--black {
+.co-cb--desc--black {
     color: black;
 }
 
-.co-cb__desc__h5 {
+.co-cb--desc--h5 {
     font-size: 14px;
     margin-bottom: 7%;
 }
@@ -220,10 +220,10 @@ button {
 }
 
 @media only screen and (min-width: 768px) and (max-width: 992px) {
-    div.co-paymentBlock {
+    div.co-payment-block  {
         flex: 1;
     }
-    div.co-cartBlock {
+    div.co-cart-block {
         flex: 1;
     }
 }
@@ -238,10 +238,10 @@ button {
     .next-content {
         flex-direction: column;
     }
-    .co-paymentBlock {
+    .co-payment-block{
         order: 2
     }
-    .co-cartBlock {
+    .co-cart-block {
         order: 1;
     }
 }
@@ -253,4 +253,4 @@ button {
     .wallet-images ul {
         flex-direction: column;
     }
-}
+} 
