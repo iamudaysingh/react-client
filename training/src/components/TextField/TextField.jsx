@@ -9,7 +9,7 @@ const TextField = (props) => {
   return (
     <>
       <input type="text" {...rest} style={{ ...style.basic, ...newError }} />
-      {error ? <p style={{ color: newError.color }}>{error}</p> : ''}
+      {error ? <p style={{ color: 'red' }}>{error}</p> : ''}
     </>
   );
 };

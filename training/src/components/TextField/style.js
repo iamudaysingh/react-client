@@ -4,7 +4,7 @@ const style = {
   },
   error: {
     border: '1px solid red',
-    color: 'red',
+    color: 'black',
   },
 };
 export default style;
