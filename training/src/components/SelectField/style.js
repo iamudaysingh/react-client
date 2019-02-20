@@ -1,5 +1,6 @@
+
 const style = {
-  basic: {
+  list: {
     width: '100%',
     margin: '1px',
     padding: '7px',
@@ -7,8 +8,8 @@ const style = {
     borderRadius: '5px',
   },
   error: {
-    border: '1px solid red',
-    color: 'black',
+    borderColor: 'red',
   },
 };
+
 export default style;
