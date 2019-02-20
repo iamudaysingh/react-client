@@ -39,10 +39,12 @@ class InputDemo extends Component {
     if (sport === Cricket) {
       this.setState({
         cricket: event.target.value,
+        football: '',
       });
     } else if (sport === Football) {
       this.setState({
         football: event.target.value,
+        cricket: '',
       });
     }
   };
@@ -65,7 +67,7 @@ class InputDemo extends Component {
           onChange={this.sportsChangeHandler}
           options={sportsArray}
         />
-
+        { sport ? <p>What is your role</p> : ''}
         {sport ? (
           <RadioField options={result} onChange={this.radioHandler} />
         ) : (
