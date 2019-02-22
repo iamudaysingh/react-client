@@ -12,6 +12,9 @@ const RadioField = (props) => {
           {option.value}
         </div>
       ))}
+      <div>
+        {error ? <p style={{ color: 'red' }}><p>{error}</p></p> : ''}
+      </div>
     </>
   );
 };

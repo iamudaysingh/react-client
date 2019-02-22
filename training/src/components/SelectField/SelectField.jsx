@@ -10,11 +10,12 @@ const SelectField = (props) => {
   return (
     <>
       <select {...rest} style={style.list}>
-        <option>{defaultText}</option>
+        <option disabled selected>{defaultText}</option>
         {options.map(option => (
           <option value={option.value}>{option.value}</option>
         ))}
       </select>
+      {error ? <p style={{ color: 'red' }}><p>{error}</p></p> : ''}
     </>
   );
 };
