@@ -20,15 +20,10 @@ class InputDemo extends Component {
       .required()
       .max(255),
 
-    sport: yup
-      .string()
-      .required(),
+    sport: yup.string().required(),
 
-    radioValue: yup
-      .string()
-      .required(),
+    radioValue: yup.string().required(),
   });
-
 
   constructor(props) {
     super(props);
@@ -55,7 +50,6 @@ class InputDemo extends Component {
       },
     };
   }
-
 
   selectHandler = field => (event) => {
     console.log('completed', field);
@@ -85,7 +79,6 @@ class InputDemo extends Component {
       });
   };
 
-
   errorHandler = (field, error) => {
     console.log(field, '=================', error);
     const { errorOccured, hasError } = this.state;
@@ -98,7 +91,7 @@ class InputDemo extends Component {
         });
       }
     });
-  }
+  };
 
   forErrors = () => {
     const { hasError, isTouched } = this.state;
@@ -112,12 +105,10 @@ class InputDemo extends Component {
       if (!objForTouched[i]) return false;
     }
     return true;
-  }
+  };
 
   render() {
-    const {
-      name, sport, errorOccured,
-    } = this.state;
+    const { name, sport, errorOccured } = this.state;
     console.log('state', this.state);
     console.log('errorOccured', errorOccured);
     let result;
@@ -154,10 +145,19 @@ class InputDemo extends Component {
           ''
         )}
 
-        { <div>
-          <Button value="Cancel" />
-          {(this.forErrors()) ? <Button value="Submit" style={{ backgroundColor: '#20b520', color: 'white' }} /> : <Button value="Submit" disabled />}
-           </div> }
+        {
+          <div>
+            <Button value="Cancel" />
+            {this.forErrors() ? (
+              <Button
+                value="Submit"
+                style={{ backgroundColor: '#20b520', color: 'white' }}
+              />
+            ) : (
+              <Button value="Submit" disabled />
+            )}
+          </div>
+        }
       </>
     );
   }
