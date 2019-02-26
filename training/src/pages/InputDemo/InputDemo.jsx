@@ -52,7 +52,6 @@ class InputDemo extends Component {
   }
 
   selectHandler = field => (event) => {
-    console.log('completed', field);
     const { errorOccured, isTouched } = this.state;
     this.setState({
       [field]: event.target.value,
@@ -80,7 +79,6 @@ class InputDemo extends Component {
   };
 
   errorHandler = (field, error) => {
-    console.log(field, '=================', error);
     const { errorOccured, hasError } = this.state;
     error.inner.forEach((element) => {
       console.log('msg', element.message);
@@ -110,7 +108,6 @@ class InputDemo extends Component {
   render() {
     const { name, sport, errorOccured } = this.state;
     console.log('state', this.state);
-    console.log('errorOccured', errorOccured);
     let result;
     if (sport === Cricket) {
       result = cricketOptions;
