@@ -1,25 +1,59 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import Grid from '@material-ui/core/Grid';
+import PropTypes from 'prop-types';
 import * as yup from 'yup';
+import Avatar from '@material-ui/core/Avatar';
+import Grid from '@material-ui/core/Grid';
+import Button from '@material-ui/core/Button';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import TextField from '@material-ui/core/TextField';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
+import withStyles from '@material-ui/core/styles/withStyles';
 import IconButton from '@material-ui/core/IconButton';
-import Person from '@material-ui/icons/Person';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import Email from '@material-ui/icons/Mail';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 
-export default class FormDialog extends React.Component {
+const styles = theme => ({
+
+  main: {
+    width: 'auto',
+    display: 'block',
+    marginLeft: theme.spacing.unit * 3,
+    marginRight: theme.spacing.unit * 3,
+    [theme.breakpoints.up(400 + theme.spacing.unit * 3 * 2)]: {
+      width: 400,
+      marginLeft: 'auto',
+      marginRight: 'auto',
+    },
+  },
+  paper: {
+    marginTop: theme.spacing.unit * 8,
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme.spacing.unit * 3}px`,
+  },
+  avatar: {
+    margin: theme.spacing.unit,
+    backgroundColor: theme.palette.secondary.main,
+  },
+  form: {
+    width: '100%',
+    marginTop: theme.spacing.unit,
+  },
+  submit: {
+    marginTop: theme.spacing.unit * 3,
+  },
+  field: {
+    paddingTop: '40px',
+  },
+});
+
+
+class LogIn extends React.Component {
   checkoutNameSchema = yup.object().shape({
-    name: yup
-      .string()
-      .required()
-      .max(255),
     email: yup
       .string()
       .email()
@@ -29,9 +63,6 @@ export default class FormDialog extends React.Component {
       .required()
       .min(8)
       .matches(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\w\s]).{8,}$/, 'Password can contain at least one upper and lower letter and at least one numeric and special character.'),
-    confirmPassword: yup.string()
-      .required('Password confirm is required')
-      .oneOf([yup.ref('password'), 'invalid password']),
   });
 
 
@@ -39,42 +70,22 @@ export default class FormDialog extends React.Component {
     super(props);
     this.state = {
       open: true,
-      name: '',
       email: '',
       password: '',
-      confirmPassword: '',
       errorOccured: {
-        name: '',
         email: '',
         password: '',
-        confirmPassword: '',
       },
       isTouched: {
-        name: false,
         email: false,
         password: false,
-        confirmPassword: false,
       },
       hasError: {
-        name: false,
         email: false,
         password: false,
-        confirmPassword: false,
       },
     };
   }
-
-  styles = themes => ({
-    container: {
-      display: 'flex',
-      flexWrap: 'wrap',
-    },
-    textField: {
-      marginLeft: themes.spacing.unit,
-      marginRight: themes.spacing.unit,
-
-    },
-  })
 
   handleClickOpen = () => {
     this.setState({ open: true });
@@ -138,60 +149,27 @@ export default class FormDialog extends React.Component {
     return true;
   };
 
-
   render() {
-    const {
-      open, errorOccured, password, confirmPassword,
-    } = this.state;
-    console.log(this.state);
-    console.log('error', errorOccured.confirmPassword);
-
+    const { classes } = this.props;
+    const { errorOccured } = this.state;
+    console.log('State', this.state);
     return (
-      <div>
-        <Dialog
-          open={open}
-          onClose={this.handleClose}
-          aria-labelledby="form-dialog-title"
-        >
-          <DialogTitle id="form-dialog-title">Add Trainee</DialogTitle>
-          <DialogContent>
-            <DialogContentText>
-              Enter Trainee Details
-            </DialogContentText>
-          </DialogContent>
+      <main className={classes.main}>
+        <CssBaseline />
+        <Paper className={classes.paper}>
+          <Avatar className={classes.avatar}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+         Log In
+          </Typography>
           <div>
-            <Grid container spacing={24}>
-              <Grid item xs={12}>
-                <TextField
-                  id="outlined-email-input"
-                  label="Name"
-                  fullWidth
-                  width="100px"
-                  style={{ margin: '3px', width: 590 }}
-                  type="text"
-                  name="name"
-                  multiline="true"
-                  autoComplete="name"
-                  variant="outlined"
-                  onChange={this.selectHandler('name')}
-                  onBlur={this.selectEventHandler('name')}
-                  error={errorOccured.name}
-                  helperText={errorOccured.name}
-                  InputProps={{
-
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <IconButton>{<Person />}</IconButton>
-                      </InputAdornment>
-                    ),
-                  }}
-                />
-              </Grid>
+            <Grid container spacing={24} className={classes.field}>
               <Grid item xs={12}>
                 <TextField
                   id="outlined-password-input"
                   label="Email"
-                  style={{ margin: '3px', width: 590 }}
+                  style={{ margin: '3px', width: 350 }}
                   type="email"
                   autoComplete="current-password"
                   margin="normal"
@@ -210,13 +188,14 @@ export default class FormDialog extends React.Component {
                   }}
                 />
               </Grid>
-              <Grid item xs={6}>
+              <Grid item xs={12}>
                 <TextField
                   id="outlined-search"
                   label="Password"
                   type="password"
                   margin="normal"
                   variant="outlined"
+                  style={{ margin: '3px', width: 350 }}
                   onChange={this.selectHandler('password')}
                   onBlur={this.selectEventHandler('password')}
                   error={errorOccured.password}
@@ -234,55 +213,41 @@ export default class FormDialog extends React.Component {
                   }}
                 />
               </Grid>
-              <Grid item xs={6}>
-                <TextField
-                  id="outlined-confirm-password"
-                  label="Confirm Password"
-                  type="password"
-                  helperText={(password === confirmPassword) ? errorOccured.confirmPassword : 'Password did not match'}
-                  margin="normal"
-                  variant="outlined"
-                  onChange={this.selectHandler('confirmPassword')}
-                  onBlur={this.selectEventHandler('confirmPassword')}
-                  error={
-                    errorOccured.confirmPassword
-                     || (
-                       !(password === confirmPassword) && !(confirmPassword.length === 0)
-                     )
-                  }
-                  InputProps={{
-
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <IconButton
-                          aria-label="Toggle password visibility"
-                        >
-                          <VisibilityOff />
-                        </IconButton>
-                      </InputAdornment>
-                    ),
-                  }}
-                />
+              <Grid item xs={12}>
+                { this.forErrors() ? (
+                  <Button
+                    onClick={this.handleClose}
+                    color="primary"
+                    disabled={false}
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                  >
+                    Submit
+                  </Button>
+                ) : (
+                  <Button
+                    onClick={this.handleClose}
+                    color="primary"
+                    disabled
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                  >
+                          Submit
+                  </Button>
+                )}
               </Grid>
             </Grid>
           </div>
-          <DialogActions>
-            <Button onClick={this.handleClose} color="primary">
-              Cancel
-            </Button>
-            { this.forErrors() ? (
-              <Button onClick={this.handleClose} color="primary" disabled={false}>
-              Submit
-              </Button>
-            ) : (
-              <Button onClick={this.handleClose} color="primary" disabled>
-            Submit
-              </Button>
-            )}
-          </DialogActions>
-
-        </Dialog>
-      </div>
+        </Paper>
+      </main>
     );
   }
 }
+
+LogIn.propTypes = {
+  classes: PropTypes.objectOf(PropTypes.object).isRequired,
+};
+
+export default withStyles(styles)(LogIn);
