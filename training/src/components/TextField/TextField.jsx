@@ -1,11 +1,9 @@
-
 import React from 'react';
 import PropTypes from 'prop-types';
 import style from './style';
 
 const TextField = (props) => {
   const { error, ...rest } = props;
-  console.log('yesssssssssss', error);
   const newError = error ? style.error : {};
   return (
     <>

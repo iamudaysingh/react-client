@@ -1,3 +1,3 @@
-import InputDemo from "./InputDemo";
+import InputDemo from './InputDemo';
 
 export default InputDemo;
