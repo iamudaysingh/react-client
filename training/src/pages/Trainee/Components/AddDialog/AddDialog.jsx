@@ -271,6 +271,7 @@ export default class FormDialog extends React.Component {
             <Button onClick={this.handleClose} color="primary" disabled={!this.forErrors()}>
             Submit
             </Button>
+
           </DialogActions>
 
         </Dialog>
