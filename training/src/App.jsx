@@ -14,7 +14,6 @@ import InputDemo from './pages/InputDemo';
 import { AuthRoute, PrivateRoute } from './Routes';
 import NoMatch from './pages/NoMatch/NoMatch';
 
-
 const App = () => (
 
   <CssBaseline>

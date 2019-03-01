@@ -225,6 +225,7 @@ class LogIn extends React.Component {
                 >
                   Submit
                 </Button>
+
               </Grid>
             </Grid>
           </div>
@@ -232,6 +233,7 @@ class LogIn extends React.Component {
         <div>
           <Footer />
         </div>
+
       </main>
     );
   }
