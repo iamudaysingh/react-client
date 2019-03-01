@@ -14,6 +14,7 @@ import IconButton from '@material-ui/core/IconButton';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import Email from '@material-ui/icons/Mail';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
+import Footer from '../../layouts/components/Footer/Footer';
 
 const styles = theme => ({
 
@@ -214,33 +215,25 @@ class LogIn extends React.Component {
                 />
               </Grid>
               <Grid item xs={12}>
-                { this.forErrors() ? (
-                  <Button
-                    onClick={this.handleClose}
-                    color="primary"
-                    disabled={false}
-                    type="submit"
-                    fullWidth
-                    variant="contained"
-                  >
-                    Submit
-                  </Button>
-                ) : (
-                  <Button
-                    onClick={this.handleClose}
-                    color="primary"
-                    disabled
-                    type="submit"
-                    fullWidth
-                    variant="contained"
-                  >
-                          Submit
-                  </Button>
-                )}
+                <Button
+                  onClick={this.handleClose}
+                  color="primary"
+                  disabled={!this.forErrors()}
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                >
+                  Submit
+                </Button>
+
               </Grid>
             </Grid>
           </div>
         </Paper>
+        <div>
+          <Footer />
+        </div>
+
       </main>
     );
   }

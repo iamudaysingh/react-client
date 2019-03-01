@@ -144,8 +144,6 @@ export default class FormDialog extends React.Component {
       open, errorOccured, password, confirmPassword,
     } = this.state;
     console.log(this.state);
-    console.log('error', errorOccured.confirmPassword);
-
     return (
       <div>
         <Dialog
@@ -239,7 +237,7 @@ export default class FormDialog extends React.Component {
                   id="outlined-confirm-password"
                   label="Confirm Password"
                   type="password"
-                  helperText={(password === confirmPassword) ? errorOccured.confirmPassword : 'Password did not match'}
+                  helperText={errorOccured.confirmPassword || 'Password enter confirm password'}
                   margin="normal"
                   variant="outlined"
                   onChange={this.selectHandler('confirmPassword')}
@@ -270,15 +268,10 @@ export default class FormDialog extends React.Component {
             <Button onClick={this.handleClose} color="primary">
               Cancel
             </Button>
-            { this.forErrors() ? (
-              <Button onClick={this.handleClose} color="primary" disabled={false}>
-              Submit
-              </Button>
-            ) : (
-              <Button onClick={this.handleClose} color="primary" disabled>
+            <Button onClick={this.handleClose} color="primary" disabled={!this.forErrors()}>
             Submit
-              </Button>
-            )}
+            </Button>
+
           </DialogActions>
 
         </Dialog>

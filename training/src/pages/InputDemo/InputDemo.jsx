@@ -66,8 +66,7 @@ class InputDemo extends Component {
     } = this.state;
     this.checkoutNameSchema
       .validate({ name, sport, radioValue }, { abortEarly: false })
-      .then((valid) => {
-        console.log('I am valid', valid);
+      .then(() => {
         this.setState({
           errorOccured: { ...errorOccured, [field]: '' },
           hasError: { ...hasError, [field]: false },
@@ -81,7 +80,6 @@ class InputDemo extends Component {
   errorHandler = (field, error) => {
     const { errorOccured, hasError } = this.state;
     error.inner.forEach((element) => {
-      console.log('msg', element.message);
       if (element.path === field) {
         this.setState({
           errorOccured: { ...errorOccured, [field]: element.message },
@@ -145,14 +143,11 @@ class InputDemo extends Component {
         {
           <div>
             <Button value="Cancel" />
-            {this.forErrors() ? (
-              <Button
-                value="Submit"
-                style={{ backgroundColor: '#20b520', color: 'white' }}
-              />
-            ) : (
-              <Button value="Submit" disabled />
-            )}
+            <Button
+              value="Submit"
+              style={{ backgroundColor: '#20b520', color: 'white' }}
+              disabled={!this.forErrors()}
+            />
           </div>
         }
       </>
