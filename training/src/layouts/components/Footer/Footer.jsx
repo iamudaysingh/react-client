@@ -9,9 +9,7 @@ class Footer extends React.Component {
 
   render() {
     return (
-      <>
-        <footer style={styleForFooter.base}> Successive technologies &copy; </footer>
-      </>
+      <footer style={styleForFooter.base}> Successive technologies &copy; </footer>
     );
   }
 }

@@ -6,7 +6,7 @@ const PrivateLayout = ({ children }) => (
   <>
     <Navbar />
     <div>
-      <div>{children}</div>
+      {children}
     </div>
   </>
 );
