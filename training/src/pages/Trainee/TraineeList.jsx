@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import FormDialog from './Components/AddDialog/AddDialog';
 import trainees from './data/trainee';
@@ -17,20 +17,17 @@ export default class TraineeList extends React.Component {
   };
 
 
-  findTrainee = () => {
-      
-    return (
-        <ul>
-          {trainees.map(item => (
-            <li>
-              <Link to={`/trainee/${item.id}`}>
-                {item.name}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      );
-  }
+  findTrainee = () => (
+    <ul>
+      {trainees.map(item => (
+        <li>
+          <Link to={`/trainee/${item.id}`}>
+            {item.name}
+          </Link>
+        </li>
+      ))}
+    </ul>
+  )
 
 
   render() {
@@ -45,25 +42,27 @@ export default class TraineeList extends React.Component {
           >
           ADD TRAINEE
           </Button>
-          <SimpleTable  id="Trainee-Table"
-          data={trainees}
-          columns={[
-            {
-              field: 'name',
-              label: 'Name',
-              align: 'center',
-            },
-            {
-              field: 'email',
-              label: 'Email Address',
-            },
-          ]}/>
+          <SimpleTable
+            id="Trainee-Table"
+            data={trainees}
+            columns={[
+              {
+                field: 'name',
+                label: 'Name',
+                align: 'center',
+              },
+              {
+                field: 'email',
+                label: 'Email Address',
+              },
+            ]}
+          />
         </div>
         <div>
-        { dialoge ? <FormDialog /> : '' }
+          { dialoge ? <FormDialog /> : '' }
         </div>
         <div>
-            {this.findTrainee()}
+          {this.findTrainee()}
         </div>
       </>
     );

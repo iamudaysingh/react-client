@@ -52,7 +52,6 @@ class TraineeDetail extends React.Component {
   }
 
   render() {
-    console.log(this.props);
     const { classes, match } = this.props;
     const { params } = match;
     const trainee = trainees.find(item => item.id === params.id);
@@ -70,7 +69,7 @@ class TraineeDetail extends React.Component {
                 {trainee.name}
               </Typography>
               <Typography variant="subtitle1" color="textSecondary">
-               {this.getDateFormat(trainee.createdAt)}
+                {this.getDateFormat(trainee.createdAt)}
               </Typography>
               <Typography component="h5" variant="h5">
                 {trainee.email}
