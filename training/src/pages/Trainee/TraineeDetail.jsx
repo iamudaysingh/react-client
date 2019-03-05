@@ -43,13 +43,17 @@ const styles = () => ({
 class TraineeDetail extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+
+
+    };
   }
 
   getDateFormat = (value) => {
     const formattedDate = moment(value).format('dddd, MMMM Do YYYY, h:mm:ss ');
     return formattedDate;
   }
+
 
   render() {
     const { classes, match } = this.props;
