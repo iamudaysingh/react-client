@@ -4,15 +4,28 @@ import PropTypes from 'prop-types';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
+import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Edit';
 import FormDialog from './Components/AddDialog/AddDialog';
 import trainees from './data/trainee';
 import SimpleTable from './Components/TraineeTable/TraineeTable';
+import EditDialog from './Components/EditDialog';
+import { RemoveDialog } from './Components';
 
 export default class TraineeList extends React.Component {
   state = {
     dialoge: false,
+    editDialog: false,
     orderBy: '',
     order: 'asc',
+    edit: false,
+    remove: false,
+    toggle: '',
+    name: '',
+    email: '',
+    id: '',
+    createdAt: '',
+    page: '0',
   };
 
 
@@ -53,9 +66,38 @@ export default class TraineeList extends React.Component {
   }
 
 
+  handleEditIconOpen = (event, name, email) => {
+    event.stopPropagation();
+    this.setState({ edit: true, name, email });
+  }
+
+  handleRemoveDialogOpen = (event, name, email, id, createdAt) => {
+    event.stopPropagation();
+    this.setState({
+      remove: true, name, email, id, createdAt,
+    });
+  }
+
+  toggle = () => {
+    this.setState(prevState => ({ edit: !prevState.edit }));
+  }
+
+  toggleRemove = () => {
+    this.setState(prevState => ({ remove: !prevState.remove }));
+  }
+
+  handleChangePage = () => {
+    this.setState(prevState => ({ page: prevState.page }));
+  }
+
   render() {
-    console.log(this.state);
-    const { dialoge, order, orderBy } = this.state;
+    const {
+      dialoge, order, orderBy, edit, remove, name, email, page,
+    } = this.state;
+
+    if (!(edit || remove)) { console.log(this.state); }
+
+
     return (
       <>
         <div>
@@ -73,6 +115,20 @@ export default class TraineeList extends React.Component {
             onSort={this.sortHandler}
             order={order}
             orderBy={orderBy}
+            count={100}
+            page={page}
+            rowsPerPage={10}
+            onChangePage={this.handleChangePage}
+            actions={[
+              {
+                icon: <EditIcon />,
+                handler: this.handleEditIconOpen,
+              },
+              {
+                icon: <DeleteIcon />,
+                handler: this.handleRemoveDialogOpen,
+              },
+            ]}
             columns={[
               {
                 field: 'name',
@@ -87,7 +143,7 @@ export default class TraineeList extends React.Component {
               {
                 field: 'createdAt',
                 label: 'Date',
-                align: 'right',
+                align: 'left',
                 format: this.getDateFormat,
               },
             ]}
@@ -95,6 +151,18 @@ export default class TraineeList extends React.Component {
         </div>
         <div>
           { dialoge ? <FormDialog /> : '' }
+        </div>
+        <div>
+          <EditDialog
+            editState={edit}
+            toggleDialog={this.toggle}
+            name={name}
+            email={email}
+            newEdit={this.handleEditIconOpen}
+          />
+        </div>
+        <div>
+          <RemoveDialog removeState={remove} toggleDialog={this.toggleRemove} />
         </div>
         <div>
           {this.findTrainee()}
@@ -105,5 +173,5 @@ export default class TraineeList extends React.Component {
 }
 
 TraineeList.propTypes = {
-  history: PropTypes.node.isRequired,
+  history: PropTypes.objectOf(PropTypes.any).isRequired,
 };

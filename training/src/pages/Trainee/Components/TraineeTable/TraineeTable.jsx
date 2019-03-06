@@ -3,10 +3,13 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
+import Grid from '@material-ui/core/Grid';
 import TableCell from '@material-ui/core/TableCell';
+import Button from '@material-ui/core/Button';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import TablePagination from '@material-ui/core/TablePagination';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
 
 const styles = theme => ({
@@ -48,7 +51,13 @@ class SimpleTable extends React.Component {
       onSelect,
       order,
       orderBy,
+      actions,
+      count,
+      rowsPerPage,
+      page,
+      handleChangePage,
     } = this.props;
+
 
     return (
       <Paper className={classes.root}>
@@ -71,6 +80,7 @@ class SimpleTable extends React.Component {
                   </TableCell>
                 )))
               }
+
             </TableRow>
           </TableHead>
           <TableBody>
@@ -87,12 +97,48 @@ class SimpleTable extends React.Component {
                       <TableCell key={cell.field} align={cell.align}>
                         {cell.format ? cell.format(((column[cell.field]))) : (column[cell.field])}
                       </TableCell>
+
                     )
                   ))
+
+
                 }
+
+                { actions.map(element => (
+                  <Grid>
+
+                    <Button
+
+                      onClick={
+                        (event) => {
+                          element.handler(event,
+                            column.name, column.email, column.id, column.createdAt);
+                        }
+                      }
+
+                    >
+
+                      {element.icon}
+                    </Button>
+
+
+                  </Grid>
+                ))}
+
               </TableRow>
+
             ))
+
             }
+            <TableRow>
+              <TablePagination
+                rowsPerPageOptions={[]}
+                count={count}
+                rowsPerPage={rowsPerPage}
+                page={page}
+                onChange={handleChangePage}
+              />
+            </TableRow>
           </TableBody>
         </Table>
       </Paper>
@@ -107,8 +153,16 @@ SimpleTable.propTypes = {
   classes: PropTypes.objectOf(PropTypes.string).isRequired,
   onSort: PropTypes.func.isRequired,
   onSelect: PropTypes.func.isRequired,
-  order: PropTypes.string.isRequired,
+  order: PropTypes.string,
   orderBy: PropTypes.string.isRequired,
+  actions: PropTypes.objectOf(PropTypes.array).isRequired,
+  count: PropTypes.number.isRequired,
+  rowsPerPage: PropTypes.number.isRequired,
+  page: PropTypes.number.isRequired,
+  handleChangePage: PropTypes.number.isRequired,
+};
+SimpleTable.defaultProps = {
+  order: 'asc',
 };
 
 export default withStyles(styles)(SimpleTable);
