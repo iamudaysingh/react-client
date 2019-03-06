@@ -8,7 +8,7 @@ import { CssBaseline } from '@material-ui/core';
 import theme from './themeSetUpDemo/theme';
 import ChildrenDemo from './pages/ChildrenDemo/ChildrenDemo';
 import LogIn from './pages/LogIn/LogIn';
-import Trainee from './pages/Trainee/index';
+import Trainee from './pages/Trainee/Trainee';
 import TextFieldDemo from './pages/TextFieldDemo';
 import InputDemo from './pages/InputDemo';
 import { AuthRoute, PrivateRoute } from './Routes';
@@ -25,9 +25,9 @@ const App = () => (
             <PrivateRoute exact path="/inputdemo" component={InputDemo} />
             <PrivateRoute exact path="/textfielddemo" component={TextFieldDemo} />
             <PrivateRoute exact path="/" component={Trainee} />
-            <PrivateRoute exact path="/trainee" component={Trainee} />
+            <PrivateRoute path="/trainee" component={Trainee} />
             <PrivateRoute exact path="/childrendemo" component={ChildrenDemo} />
-            <PrivateRoute path="/" component={NoMatch} />
+            <PrivateRoute exactpath="/" component={NoMatch} />
           </Switch>
         </Router>
       </Typography>
